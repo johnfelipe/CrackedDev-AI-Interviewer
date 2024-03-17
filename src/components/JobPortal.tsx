@@ -118,7 +118,7 @@ const JobPortal: FC = () => {
                 className="flex flex-row"
                 href={{
                   pathname: '/generateQues',
-                  query: { jobProfile: job.title, jobType: job.job_type, companyName: job.company, jobRequirements: job.description},
+                  query: {id: job.id, jobProfile: job.title, jobType: job.job_type, companyName: job.company, jobRequirements: job.description},
                 }}
               >
                 <Bot className="w-5 h-5 mr-2" /> Let's Interview

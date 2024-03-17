@@ -1,11 +1,15 @@
 import React from "react";
 import prisma from "@/lib/db";
 import GenerateAllQues from "@/components/GenerateAllQues";
-import AutomatedButton from "@/components/AssessButton";
+import AssessButton from "@/components/AssessButton";
 
 export default async function GenerateQues ({searchParams}:{
   searchParams:{
-    id: string;
+    id: string,
+    jobProfile: string,
+    jobType: string,
+    companyName: string,
+    jobRequirements: string,
   }
 }){
   console.log(searchParams)
@@ -20,7 +24,7 @@ export default async function GenerateQues ({searchParams}:{
         <div className="bg-secondary p-6 rounded-lg shadow-md shadow-black gap-4 flex flex-col">
           <h1 className="font-semibold">Self Assessment</h1>
           <p>Improve your interviewee skills, build your personalized interview environment and receive your feedback with analytics.</p>
-          <div><AutomatedButton/></div>
+          <div><AssessButton infoId={infoId}/></div>
         </div>
       </div>
     </div>
