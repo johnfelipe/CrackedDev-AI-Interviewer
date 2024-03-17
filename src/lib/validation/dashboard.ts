@@ -56,5 +56,13 @@ export const createAssessSchema = z.object({
   }),
 });
 
+export const updateAssessSchema = createAssessSchema.extend({
+  id: z.string().min(1),
+});
+
+export const deleteAssessSchema = z.object({
+  id: z.string().min(1),
+});
+
 export type CreateAssessSchema = z.infer<typeof createAssessSchema>;
 export type CreateResultSchema = z.infer<typeof createResultSchema>;

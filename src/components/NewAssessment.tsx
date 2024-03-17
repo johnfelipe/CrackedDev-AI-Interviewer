@@ -201,87 +201,86 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
                 <Form {...form}>
                     <form className='space-y-3' onSubmit={form.handleSubmit(onSubmit)}>
                         <div className={cn('space-y-3',{hidden: formStep == 1})}>
-                                    <FormField control={form.control} name='name' render={({field})=>(
-                                    <FormItem>
-                                        <FormLabel>Your Name</FormLabel>
-                                        <FormControl><Input placeholder='Interviewee Name'{...field}/></FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                    )}/>
-                                    <FormField control={form.control} name='jobProfile' render={({field})=>(
-                                        <FormItem className='flex flex-col gap-0'>
-                                            <FormLabel>Career Profile</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder='Assistant Engineer' {...field}/>
-                                            </FormControl>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}/>
-                                    <FormField control={form.control} name="jobtype" render={({ field }) => (
-                                            <FormItem>
-                                            <FormLabel>Employment Title</FormLabel>
-                                            <Select
-                                                onValueChange={field.onChange}
-                                                defaultValue={field.value}
-                                            >
-                                                <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select Your Employment Title" />
-                                                </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                {['Internship', 'Part-Time', 'Full-Time', 'Contract', infoId?.jobType].map((title) => {
-                                                    return (
-                                                    <SelectItem value={title!.toString()} key={title}>
-                                                        {title ? title : infoId?.jobType}
-                                                    </SelectItem>
-                                                    );
-                                                })}
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage />
-                                            </FormItem>
-                                    )}/>
-                                    <FormField control={form.control} name='companyName' render={({field})=>(
-                                    <FormItem>
-                                        <FormLabel>Company Details</FormLabel>
-                                        <FormControl>
-                                        <Input placeholder='Apple.Inc' {...field}/>
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                    )}/>
-                                    <FormField control={form.control} name='jobRequirements' render={({field})=>(
-                                        <FormItem>
-                                            <FormLabel>Profile Requirement</FormLabel>
-                                            <FormControl>
-                                            <Textarea className='h-48' placeholder="Strong MERN development experience for 5+ years and experience in leading a team.
-                                            • Expertise in JavaScript
-                                            • HTML 5, CSS 3 & JSON
-                                            • Superior ability to write good tests for 100% coverage in Jest or Mocha or Chai or Karma or Jasmine or Enzyme or Cypress
-                                            • Excellent understanding of database, schema designing and hands-on complex SQL queries
-                                            • Excellent understanding of REST services using NodeJS or Java Spring Boot" {...field}/>
-                                            </FormControl>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}/>
-                                    <FormField control={form.control} name='level' render={({ field }) => (
-                                    <FormItem>
-                                    <FormLabel>Difficulty Level Of Interview <span className='text-green-800 dark:text-green-300'>({diflevel(field.value)})</span></FormLabel>
+                            <FormField control={form.control} name='name' render={({field})=>(
+                            <FormItem>
+                                <FormLabel>Your Name</FormLabel>
+                                <FormControl><Input placeholder='Interviewee Name'{...field}/></FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                            )}/>
+                            <FormField control={form.control} name='jobProfile' render={({field})=>(
+                                <FormItem className='flex flex-col gap-0'>
+                                    <FormLabel>Career Profile</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            className='cursor-pointer'
-                                            placeholder='Difficulty Level'
-                                            min={1}
-                                            max={3}
-                                            type="range"
-                                            {...field}
-                                        />
+                                        <Input placeholder='Assistant Engineer' {...field}/>
                                     </FormControl>
                                     <FormMessage/>
+                                </FormItem>
+                            )}/>
+                            <FormField control={form.control} name="jobtype" render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel>Employment Title</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select Your Employment Title" />
+                                        </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                        {['Internship', 'Part-Time', 'Full-Time', 'Contract', infoId?.jobType].map((title) => {
+                                            return (
+                                            <SelectItem value={title!.toString() || "apply"} key={title}>
+                                                {title ? title : infoId?.jobType}
+                                            </SelectItem>
+                                            );
+                                        })}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
                                     </FormItem>
-                                    )}/>
-
+                            )}/>
+                            <FormField control={form.control} name='companyName' render={({field})=>(
+                            <FormItem>
+                                <FormLabel>Company Details</FormLabel>
+                                <FormControl>
+                                <Input placeholder='Apple.Inc' {...field}/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                            )}/>
+                            <FormField control={form.control} name='jobRequirements' render={({field})=>(
+                                <FormItem>
+                                    <FormLabel>Profile Requirement</FormLabel>
+                                    <FormControl>
+                                    <Textarea className='h-48' placeholder="Strong MERN development experience for 5+ years and experience in leading a team.
+                                    • Expertise in JavaScript
+                                    • HTML 5, CSS 3 & JSON
+                                    • Superior ability to write good tests for 100% coverage in Jest or Mocha or Chai or Karma or Jasmine or Enzyme or Cypress
+                                    • Excellent understanding of database, schema designing and hands-on complex SQL queries
+                                    • Excellent understanding of REST services using NodeJS or Java Spring Boot" {...field}/>
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}/>
+                            <FormField control={form.control} name='level' render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Difficulty Level Of Interview <span className='text-green-800 dark:text-green-300'>({diflevel(field.value)})</span></FormLabel>
+                            <FormControl>
+                                <Input
+                                    className='cursor-pointer'
+                                    placeholder='Difficulty Level'
+                                    min={1}
+                                    max={3}
+                                    type="range"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage/>
+                            </FormItem>
+                            )}/>
                         </div>
                         <div className={cn('space-y-3',{hidden: formStep == 0})}>
                             <FormField control={form.control} name='questions' render={({ field }) => (
