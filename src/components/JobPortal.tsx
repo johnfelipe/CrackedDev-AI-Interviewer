@@ -107,6 +107,16 @@ const JobPortal: FC = () => {
                 Views :{' '}
                 <span className="text-primary font-normal">{job.views}</span>
               </p>
+              <p className="font-bold text-gray-600 dark:text-gray-400">
+                Applications :{' '}
+                <span className="text-primary font-normal">{job.applications}</span>
+              </p>
+              <Link
+                href={job.apply_url}
+                className="text-blue-500 hover:underline"
+              >
+                Apply Here
+              </Link>
             </div>
           </CardContent>
           <div className="w-full flex justify-end">

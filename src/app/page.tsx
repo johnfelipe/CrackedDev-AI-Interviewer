@@ -36,12 +36,6 @@ export default async function Home() {
                 Feedback & Analytics
               </Link>        
             </Button>
-            <Button className='p-6 gap-2 shadow-md shadow-black border-none bg-gradient-to-r from-purple-500 to-violet-300 text-white rounded-xl'>
-              <Link className='flex flex-row gap-2 items-center' href={'/dashboard'}>
-                <Medal/>
-                Ranking 
-              </Link>
-            </Button>
           </div>
         </div>
         <div className='flex px-4 pt-1 bg-white/20 text-white justify-between gap-4 flex-row items-center text-primary h-14 absolute bottom-0 w-full'>
