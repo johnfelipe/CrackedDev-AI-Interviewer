@@ -23,7 +23,7 @@ type Props = {
     open: boolean,
     setOpen: (open: boolean) => void,
     toEdit?: Assess, 
-    infoId: {
+    infoId?: {
         id: string,
         jobProfile: string,
         jobType: string,
@@ -51,10 +51,10 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
         resolver: zodResolver(createAssessSchema),
         defaultValues: {
             name: toEdit?.name || "",
-            jobProfile: toEdit?.jobProfile || infoId.jobProfile,
-            jobtype: toEdit?.jobtype || infoId.jobType,
-            companyName: toEdit?.companyName || infoId.companyName,
-            jobRequirements: toEdit?.jobRequirements || infoId.jobRequirements,
+            jobProfile: toEdit?.jobProfile || infoId?.jobProfile,
+            jobtype: toEdit?.jobtype || infoId?.jobType,
+            companyName: toEdit?.companyName || infoId?.companyName,
+            jobRequirements: toEdit?.jobRequirements || infoId?.jobRequirements,
             level: toEdit?.level || "",
             questions: toEdit?.questions || [],
         },
@@ -230,10 +230,10 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
                                                 </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                {['Internship', 'Part-Time', 'Full-Time', 'Contract', infoId.jobType].map((title) => {
+                                                {['Internship', 'Part-Time', 'Full-Time', 'Contract', infoId?.jobType].map((title) => {
                                                     return (
-                                                    <SelectItem value={title.toString()} key={title}>
-                                                        {title ? title : infoId.jobType}
+                                                    <SelectItem value={title!.toString()} key={title}>
+                                                        {title ? title : infoId?.jobType}
                                                     </SelectItem>
                                                     );
                                                 })}

@@ -1,7 +1,9 @@
 import React from "react";
 import prisma from "@/lib/db";
-import GenerateAllQues from "@/components/GenerateAllQues";
 import AssessButton from "@/components/AssessButton";
+import JoinYourInterview from "@/components/JoinYourInterview";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function GenerateQues ({searchParams}:{
   searchParams:{
@@ -20,6 +22,13 @@ export default async function GenerateQues ({searchParams}:{
         <div className="bg-secondary p-6 rounded-lg shadow-md shadow-black flex flex-col gap-4">
           <h1 className="font-semibold">Join Your Interview</h1>
           <p>Seize your opportunity! Join your interview seamlessly by using the provided meeting ID as a candidate.</p>
+          <div>
+          <Button className='p-3 shadow-md shadow-black border-none bg-gradient-to-br from-violet-500 to-violet-300 text-white rounded-xl'>
+            <Link href={'/joinYourInterview'}>
+              Join Your Interviews
+            </Link>
+          </Button>
+          </div>
         </div>
         <div className="bg-secondary p-6 rounded-lg shadow-md shadow-black gap-4 flex flex-col">
           <h1 className="font-semibold">Self Assessment</h1>
