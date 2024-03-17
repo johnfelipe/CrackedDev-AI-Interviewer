@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect, FC } from "react";
 import Link from "next/link";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Bot } from "lucide-react";
 
 type jobType = {
   id: string;
@@ -17,7 +20,7 @@ type jobType = {
   apply_url: string;
 };
 
-const Page: FC = () => {
+const JobPortal: FC = () => {
   const [data, setData] = useState<jobType[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -36,38 +39,35 @@ const Page: FC = () => {
 
   return (
     <div className="p-4">
-      {loading && <p className="text-blue-500">Loading...</p>}
-      {data && (
-        <div className="p-4 rounded-md mt-4">
-          <h1 className="mb-5 text-4xl">Jobs</h1>
-          {data.map((job: jobType) => (
-            <div
-              key={job.id}
-              className="m-5 rounded-md border border-gray-300 p-5"
-            >
-              <h2 className="mb-2 text-2xl">{job.title}</h2>
-              <p className="mb-2">{job.description}</p>
-              <p className="mb-2">Company: {job.company}</p>
-              <p className="mb-2">
-                Technologies: {job.technologies.join(", ")}
-              </p>
-              <p className="mb-2">Main Technology: {job.main_technology}</p>
-              <p className="mb-2">Job Type: {job.job_type}</p>
-              <p className="mb-2">Salary: {job.max_payment_usd} USD</p>
-              <p className="mb-2">Location: {job.location_iso || "Remote"}</p>
-              <p className="mb-2">Applications: {job.applications}</p>
-              <p className="mb-2">Views: {job.views}</p>
-              <Link
-                href={job.apply_url}
-                className="text-blue-500 hover:underline"
-              >
-                Apply Here
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+      {data && data.map((job: jobType) => (
+          <Card key={job.id} className="cursor-pointer shadow-md shadow-black bg-secondary transition-shadow hover:shadow-lg">
+            <CardHeader onClick={() => setShowEditDialog(true)}>
+              <CardTitle>{job.title}</CardTitle>
+              <CardDescription onClick={() => setShowEditDialog(true)}>
+                {createdUpdatedAtTimestamp}
+                {wasUpdated && " (updated)"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent onClick={() => setShowEditDialog(true)} className="mb-0 pb-0">
+              <div className="mb-4">
+                <p className="font-bold text-gray-600 dark:text-gray-400">Company : <span className="text-primary font-normal">{assessment.companyName}</span></p>
+              </div>
+              
+            </CardContent>
+            <h2 className="mb-2 text-2xl">{job.title}</h2>
+            <p className="mb-2">{job.description}</p>
+            <p className="mb-2">Company: {job.company}</p>
+            <p className="mb-2">Technologies: {job.technologies.join(", ")}</p>
+            <p className="mb-2">Main Technology: {job.main_technology}</p>
+            <p className="mb-2">Job Type: {job.job_type}</p>
+            <p className="mb-2">Salary: {job.max_payment_usd} USD</p>
+            <p className="mb-2">Location: {job.location_iso || "Remote"}</p>
+            <p className="mb-2">Applications: {job.applications}</p>
+            <p className="mb-2">Views: {job.views}</p>
+            <Link href={job.apply_url} className="text-blue-500 hover:underline">Apply Here</Link>
+          </Card>
+        ))}
     </div>
   );
 };
-export default Page;
+export default JobPortal;
