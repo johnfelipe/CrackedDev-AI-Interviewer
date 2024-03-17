@@ -1,9 +1,10 @@
 import React from 'react'
 import prisma from "@/lib/db";
 import { auth, clerkClient } from '@clerk/nextjs';
-import { ArrowRight, BookOpenCheck, Link, ScrollTextIcon, Trophy } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, ScrollTextIcon, Trophy } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AssessmentDisplay from '@/components/AssessmentDisplay';
+import Link from 'next/link';
 
 
 type Props = {}
@@ -56,7 +57,7 @@ const JoinYourInterview = async(props: Props) => {
                     <TableCell className="whitespace-nowrap text-black dark:text-white">{result.jobtype}</TableCell>
                     <TableCell className="whitespace-nowrap text-black dark:text-white">{level(result.level)}</TableCell>
                     <TableCell className="whitespace-nowrap text-black dark:text-white">{result.createdAt.toLocaleString()}</TableCell>
-                    <TableCell className="whitespace-nowrap text-black dark:text-white"><Link href={`feedback?id=${result.id}`} className="flex flex-row text-violet-700 dark:text-violet-400">Feedback <ArrowRight className="ml-2 w-5 h-5"/></Link></TableCell>
+                    <TableCell className="whitespace-nowrap text-black dark:text-white"><Link href={`feedback?id=${result.id}`} className="flex flex-row text-violet-700 dark:text-violet-400">Feedback<ArrowRight className="ml-2 w-5 h-5"/></Link></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

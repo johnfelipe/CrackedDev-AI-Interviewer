@@ -114,6 +114,7 @@ const JobPortal: FC = () => {
               <Link
                 href={job.apply_url}
                 className="text-blue-500 hover:underline"
+                target="_blank"
               >
                 Apply Here
               </Link>
