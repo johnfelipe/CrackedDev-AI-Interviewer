@@ -20,18 +20,18 @@ const Dashboard = async () => {
   const userName = `${currentUser?.firstName} ${currentUser?.lastName}` || undefined;
   
   if (!userId) throw Error("userId undefined");
-  const EveryAssessment = await prisma.assess.findMany({ where: { userId } });
-  const EveryResult = await prisma.result.findMany({  where: { userId },
-    include: {
-      questions: {
-        include: {
-          strengths: true,
-          improvements: true,
-        },
-      },
-      analytics: true,
-    }, });
-  const EveryAutoAssessment = await prisma.automated_Assess.findMany({ });
+  // const EveryAssessment = await prisma.assess.findMany({ where: { userId } });
+  // const EveryResult = await prisma.result.findMany({  where: { userId },
+  //   include: {
+  //     questions: {
+  //       include: {
+  //         strengths: true,
+  //         improvements: true,
+  //       },
+  //     },
+  //     analytics: true,
+  //   }, });
+  // const EveryAutoAssessment = await prisma.automated_Assess.findMany({ });
   const level = (num:string) => {
     if(num=='1') return 'Beginner'
     else if (num=='2') return 'Intermediate'
@@ -41,19 +41,7 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col max-w-6xl mx-auto mt-10 gap-8 p-4 mb-4">
 
-      <div className="w-full flex flex-col sm:flex-row gap-4">
-        <div className="bg-secondary p-6 rounded-lg shadow-md shadow-black flex flex-col gap-4">
-          <h1 className="font-semibold">Join Your Interview</h1>
-          <p>Seize your opportunity! Join your interview seamlessly by using the provided meeting ID as a candidate.</p>
-        </div>
-        <div className="bg-secondary p-6 rounded-lg shadow-md shadow-black gap-4 flex flex-col">
-          <h1 className="font-semibold">Self Assessment</h1>
-          <p>Improve your interviewee skills, build your personalized interview environment and receive your feedback with analytics.</p>
-          <div><AssessButton/></div>
-        </div>
-      </div>
-
-      <div>
+      {/* <div>
         <h1 className="bg-secondary flex flex-row gap-2 w-fit mb-4 p-2 px-4 shadow-md shadow-black text-lg text-start rounded-lg text-gray-600 dark:text-gray-400 items-center"><Trophy className="w-5 h-5"/>Hosted Assessments</h1>
         <div className="bg-secondary p-4 rounded-lg shadow-md shadow-black flex flex-col gap-4">
             <Table>
@@ -121,14 +109,12 @@ const Dashboard = async () => {
               </TableBody>
             </Table>
         </div>
-      </div>
+      </div> */}
 
       <div>
-        <h1 className="bg-secondary flex flex-row gap-2 w-fit mb-4 p-2 px-4 shadow-md shadow-black text-lg text-start rounded-lg text-gray-600 dark:text-gray-400 items-center"><ScrollTextIcon className="w-5 h-5"/> Self Assessment Cards</h1>
-        <div className="grid gap-4 place-content-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        {EveryAssessment.map((assessment) => (
-          <AssessmentDisplay assessment={assessment} key={assessment.id} />
-        ))}
+        <h1 className="bg-secondary flex flex-row gap-2 w-fit mb-4 p-2 px-4 shadow-md shadow-black text-lg text-start rounded-lg text-gray-600 dark:text-gray-400 items-center"><ScrollTextIcon className="w-5 h-5"/>Job Board</h1>
+        <div className="">
+          <JobPortal/>
         </div>
       </div>
 

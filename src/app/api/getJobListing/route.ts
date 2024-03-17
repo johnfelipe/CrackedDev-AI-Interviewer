@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const API_KEY = process.env.API_KEY;
-  const LIMIT = 2;
+  const LIMIT = 200;
   const ACTIVE = true;
   const response = await fetch(
     `https://api.crackeddevs.com/v1/get-jobs?limit=${LIMIT}&active=${ACTIVE}`,
