@@ -42,4 +42,19 @@ export const createResultSchema = z.object({
   ),
 });
 
+export const createAssessSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  jobProfile: z.string().min(1, { message: "Job Profile is required" }),
+  jobtype: z.string().min(1, { message: "Job Type is required" }),
+  companyName: z.string().min(1, { message: "Company Name is required" }),
+  jobRequirements: z
+    .string()
+    .min(1, { message: "Job Requirements is required" }),
+  level: z.string().min(1, { message: "Level is required" }),
+  questions: z.array(z.string()).refine((data) => data.length >= 3, {
+    message: "At least three questions are required",
+  }),
+});
+
+export type CreateAssessSchema = z.infer<typeof createAssessSchema>;
 export type CreateResultSchema = z.infer<typeof createResultSchema>;
