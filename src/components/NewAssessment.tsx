@@ -60,6 +60,56 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
         },
     });   
 
+    async function onSubmit(input:CreateAssessSchema) {
+        console.log("reached the submission area")
+        try{
+            if (toEdit) {
+                const response = await fetch("/api/assess", {
+                  method: "PUT",
+                  body: JSON.stringify({
+                    id: toEdit.id,
+                    ...input,
+                  }),
+                });
+                if (!response.ok) throw Error("Status code: " + response.status);
+              } else {
+                const response = await fetch("/api/assess", {
+                  method: "POST",
+                  body: JSON.stringify(input),
+                });
+                if (!response.ok) throw Error("Status code: " + response.status);
+                form.reset();
+              }
+            router.refresh();
+            setOpen(false);
+            setFormStep(0); 
+        } catch (error){
+            console.error(error);
+            alert("Something went wrong, Please try again.");
+        }
+    }
+
+    async function deleteEvent() {
+        if (!toEdit) return;
+        setDeleteInProgress(true);
+        try {
+          const response = await fetch("/api/assess", {
+            method: "DELETE",
+            body: JSON.stringify({
+              id: toEdit.id,
+            }),
+          });
+          if (!response.ok) throw Error("Status code: " + response.status);
+          router.refresh();
+          setOpen(false);
+        } catch (error) {
+          console.error(error);
+          alert("Something went wrong. Please try again.");
+        } finally {
+          setDeleteInProgress(false);
+        }
+    }
+
     const generateQuestion = async (index: number) => {
         setCurateWithAILoading(true);
         const { jobProfile, companyName, jobtype, jobRequirements, questions, level } = form.getValues();
@@ -180,10 +230,10 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
                                                 </SelectTrigger>
                                                 </FormControl>
                                                 <SelectContent>
-                                                {['Internship', 'Part-Time', 'Full-Time', 'Contract'].map((title) => {
+                                                {['Internship', 'Part-Time', 'Full-Time', 'Contract', infoId.jobType].map((title) => {
                                                     return (
                                                     <SelectItem value={title.toString()} key={title}>
-                                                        {title}
+                                                        {title ? title : infoId.jobType}
                                                     </SelectItem>
                                                     );
                                                 })}
@@ -330,9 +380,6 @@ const NewAssessment = ({open, setOpen, toEdit, infoId}: Props) => {
                                 Submit
                             </Button>
                             <Button type='button' onClick={()=>{
-                                form.trigger(['name'])
-                                const name = form.getFieldState('name')
-                                if(!toEdit && (!name.isDirty || name.invalid)) return;
                                 setFormStep(1)
                                 }} className={cn('p-5 shadow-md shadow-black border-none bg-gradient-to-tl from-violet-500 to-violet-300 text-white rounded-xl', {hidden: formStep == 1})}>
                                 Questions
