@@ -1,7 +1,6 @@
 import React from "react";
 import prisma from "@/lib/db";
 import AssessButton from "@/components/AssessButton";
-import JoinYourInterview from "@/components/JoinYourInterview";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
