@@ -1,53 +1,4 @@
-"use client";
-import { useState, useEffect, FC } from "react";
-import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
-import { Bot } from "lucide-react";
-import { useRouter } from "next/navigation";
-
-type jobType = {
-  id: string;
-  title: string;
-  description: string;
-  company: string;
-  technologies: string[];
-  main_technology: string;
-  job_type: string;
-  max_payment_usd: number;
-  location_iso: string;
-  applications: number;
-  views: number;
-  apply_url: string;
-  logo_url: string;
-};
-
-const JobPortal: FC = () => {
-  const [data, setData] = useState<jobType[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/getJobListing")
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-        setLoading(false);
-      });
-  }, []);
-
-  const [showEditDialog, setShowEditDialog] = useState(false);
-  const router = useRouter();
-
-  return (
-    <>
-      <div className="grid gap-4 place-content-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-      {data && data.map((job: jobType) => (
+{data && data.map((job: jobType) => (
           <Card key={job.id} className="cursor-pointer shadow-md shadow-black bg-secondary transition-shadow hover:shadow-lg">
           <CardHeader onClick={() => setShowEditDialog(true)}>
             <div className="flex items-center">
@@ -117,7 +68,7 @@ const JobPortal: FC = () => {
               <Link
                 className="flex flex-row"
                 href={{
-                  pathname: '/generateQues',
+                  pathname: '/interview',
                   query: { id: job.id },
                 }}
               >
@@ -127,9 +78,3 @@ const JobPortal: FC = () => {
           </div>
         </Card>
         ))}
-      </div>
-    </>
-    
-  );
-};
-export default JobPortal;
